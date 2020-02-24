@@ -6,8 +6,8 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from datetime import datetime, timedelta
 
-# local import
-#from app.database.connection import initializedb
+#local import
+from app.db.connections import initializedb
 
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
@@ -30,7 +30,7 @@ def create_app(config_name):
  
 
  
-    #initializedb()
+    initializedb()
     app.config['JWT_SECRET_KEY'] = 'SECRET'
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=100) 
     jwt = JWTManager(app)
