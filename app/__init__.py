@@ -21,17 +21,16 @@ def create_app(config_name):
   
     def configure_blueprints(app):
         """ Configure blueprints . """
-        #from app.api.routes.routes import auth_blueprint
+        from app.routes.routes import auth_blueprint
 
-        #app_blueprints = [ auth_blueprint ]
+        app_blueprints = [ auth_blueprint ]
 
-        #for bp in app_blueprints:
-            #CORS(bp)
-            #app.register_blueprint(bp)
+        for bp in app_blueprints:
+            CORS(bp)
+            app.register_blueprint(bp)
 
     """register the blueprints"""
     configure_blueprints(app) 
- 
 
  
     initializedb()
