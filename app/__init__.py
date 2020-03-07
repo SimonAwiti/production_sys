@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 #local import
 from app.db.connections import initializedb
-from instance.config import app_config
+#from instance.config import app_config
 
 
 def create_app(config_name):
