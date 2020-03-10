@@ -1,6 +1,6 @@
 """Views for the the admin Resource"""
 from flask_restful import Resource, reqparse
-from flask import request, Blueprint, jsonify, Flask
+from flask import request, Blueprint, jsonify, Flask, render_template
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity

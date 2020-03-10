@@ -12,7 +12,7 @@ from app.db.connections import initializedb
 
 
 def create_app(config_name):
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__, instance_relative_config=True, static_url_path='/static')
     app.url_map.strict_slashes = False
     CORS(app)
 
@@ -39,7 +39,7 @@ def create_app(config_name):
 
 
 
-    @app.route('/')
-    def root():
-        return redirect ('https://documenter.getpostman.com/view/5353857/SVSHtVmy?version=latest')
+    @app.route("/")
+    def index():
+        return render_template("index.html")
     return app
