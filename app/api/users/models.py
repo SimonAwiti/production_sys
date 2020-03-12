@@ -1,6 +1,6 @@
 """handles all operations for creating and fetching data relating to users"""
 import psycopg2
-from flask import request, jsonify, make_response, json
+from flask import request, jsonify, make_response, json, Blueprint, request, jsonify, redirect, render_template, url_for
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from psycopg2.extras import RealDictCursor
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -64,8 +64,10 @@ class Admin(Helper):
                             },
                         "success":"Administrator Successfully logged in", 
                         "access_token":access_token})
-                    response.status_code = 200
+                    status_code = 200
                     return response
+                    return status_code
+
             response = jsonify({"status": 401,
                 "msg" : "Error logging in, credentials not found"})
             response.status_code = 401
@@ -76,3 +78,4 @@ class Admin(Helper):
                                 'msg':'Problem fetching record from the database'})
             response.status_code = 500
             return response
+

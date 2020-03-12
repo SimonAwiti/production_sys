@@ -1,6 +1,6 @@
 # app/__init__.py
 import os
-from flask import Flask, redirect, jsonify,render_template
+from flask import Flask, redirect, jsonify,render_template, request, url_for
 from flask_restful import Api
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 
 #local import
 from app.db.connections import initializedb
+from app.api.users.models import Admin
 #from instance.config import app_config
 
 
@@ -42,4 +43,16 @@ def create_app(config_name):
     @app.route("/")
     def index():
         return render_template("index.html")
+
+    @app.route("/login",methods=["GET", "POST"])
+    def login():
+        if request.method == "POST":
+            login = Admin().login_admin(
+                request.json['email'],
+                request.json['password'])
+            if Admin.status_code is 200:
+                return redirect(url_for("index"))
+        return render_template("login.html")
+        
+
     return app
